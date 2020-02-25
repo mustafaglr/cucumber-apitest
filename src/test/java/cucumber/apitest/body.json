@@ -1,0 +1,63 @@
+{
+
+    "id": {
+
+        "value": "192837882"
+
+    },
+
+    "type": "C",
+
+    "individual": {
+
+        "id": {
+
+            "value": "64310910688"
+
+        },
+
+        "placeOfBirth": "ADANA",
+
+        "birthDate": "12/12/1992",
+
+        "givenName": "SOTADA",
+
+        "familyName": "SOTSOYADA",
+
+        "characteristic": [
+
+            {
+
+                "value": "SOTBABAA"
+
+            }
+
+        ]
+
+    },
+
+    "characteristic": [
+
+        {
+
+            "characteristicsValue": [
+
+                {
+
+                    "value": "Y"
+
+                },
+
+                {
+
+                    "value": "Y"
+
+                }
+
+            ]
+
+        }
+
+    ]
+
+}
