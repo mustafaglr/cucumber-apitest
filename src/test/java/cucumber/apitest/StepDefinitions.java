@@ -76,59 +76,57 @@ public class StepDefinitions {
 	}
 	
 	@And("^I call uri \"(.*)\" with type \"(.*)\"$")
-    public void sendRequest(String remoteAddress,String type){
-		//DEFAULT
-		
-    	 try {
-    		 restTemplate = new RestTemplate();
- 
-    	     if(paramSet) {
-            	 builder = UriComponentsBuilder.fromHttpUrl(remoteAddress);
-        	   	 for (Map.Entry<String, String> entry : params.entrySet()) {
-        	   	     builder.queryParam(entry.getKey(), entry.getValue());
-        	   	 }
-    	     }
+    	public void sendRequest(String remoteAddress,String type){		
+		 try {
+			 restTemplate = new RestTemplate();
 
-    	   	 HttpMethod httpMethod = null;
-    	   	 if(type.contains("GET"))
-    	   		httpMethod = HttpMethod.GET;
-    	   	 else if(type.contains("POST"))
-    	   		httpMethod = HttpMethod.POST; 
-    	   	 else if(type.contains("PUT"))
-    	   		httpMethod = HttpMethod.PUT; 
-    	   	 else if(type.contains("HEAD"))
-    	   		httpMethod = HttpMethod.HEAD; 
-    	   	 else if(type.contains("DELETE"))
-    	   		httpMethod = HttpMethod.DELETE; 
-    	   	 else if(type.contains("OPTIONS"))
-    	   		httpMethod = HttpMethod.OPTIONS; 
-    	   	 else if(type.contains("PATCH"))
-    	   		httpMethod = HttpMethod.PATCH; 
-    	   	 
-    	   	 
-             entity = new HttpEntity<String>(jsonStr, header);
-            
-             if(!paramSet)
-                 response = restTemplate.exchange(remoteAddress, httpMethod, entity, String.class);
-             else
-            	 response = restTemplate.exchange(builder.toUriString(), httpMethod, entity, String.class);
-             paramSet = false;
-             
-    	 }catch(Exception e) {
-    		 throw new RuntimeException("Exception",e);
-    	 }
+		     if(paramSet) {
+			 builder = UriComponentsBuilder.fromHttpUrl(remoteAddress);
+				 for (Map.Entry<String, String> entry : params.entrySet()) {
+				     builder.queryParam(entry.getKey(), entry.getValue());
+				 }
+		     }
 
-    }
+			 HttpMethod httpMethod = null;
+			 if(type.contains("GET"))
+				httpMethod = HttpMethod.GET;
+			 else if(type.contains("POST"))
+				httpMethod = HttpMethod.POST; 
+			 else if(type.contains("PUT"))
+				httpMethod = HttpMethod.PUT; 
+			 else if(type.contains("HEAD"))
+				httpMethod = HttpMethod.HEAD; 
+			 else if(type.contains("DELETE"))
+				httpMethod = HttpMethod.DELETE; 
+			 else if(type.contains("OPTIONS"))
+				httpMethod = HttpMethod.OPTIONS; 
+			 else if(type.contains("PATCH"))
+				httpMethod = HttpMethod.PATCH; 
+
+
+		     entity = new HttpEntity<String>(jsonStr, header);
+
+		     if(!paramSet)
+			 response = restTemplate.exchange(remoteAddress, httpMethod, entity, String.class);
+		     else
+			 response = restTemplate.exchange(builder.toUriString(), httpMethod, entity, String.class);
+		     paramSet = false;
+
+		 }catch(Exception e) {
+			 throw new RuntimeException("Exception",e);
+		 }
+
+    	}
 	@Then("^I get status$")
-    public void requestStatus() {
+    	public void requestStatus() {
 
-        if (response.getStatusCode() == HttpStatus.OK) {
-            System.out.println("response received -> " + response.getStatusCode());
-            System.out.println(response.getBody());
-        } else {
-            System.out.println("error occurred");
-            System.out.println(response.getStatusCode());
-        }
-    }
+		if (response.getStatusCode() == HttpStatus.OK) {
+		    System.out.println("response received -> " + response.getStatusCode());
+		    System.out.println(response.getBody());
+		} else {
+		    System.out.println("error occurred");
+		    System.out.println(response.getStatusCode());
+		}
+   	 }
 	
 }
